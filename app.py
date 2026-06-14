@@ -17,8 +17,9 @@ question = st.text_input(
 
 if question:
     st.write(question)
-    response = model.generate_content(
-      question
-    )
+    # response = model.generate_content(
+    #  question
+    #)
   
-  st.write(response.text)
+  #st.write(response.text)
+    st.write("Hola")
