@@ -11,6 +11,9 @@ else:
   
 st.title("Analog Agent")
 
+# --- CONECTANDO CON GEMINI ---
+model = genai.GenerativeModel("gemini-2.5-flash")
+
 question = st.text_input(
     "Pregunta"
 )
