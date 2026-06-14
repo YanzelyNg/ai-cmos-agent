@@ -1,6 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
-from tools import calculate
+import tools
 
 # --- CONFIGURACIÓN INICIAL ---
 # st.secrets['GOOGLE_API_KEY'] busca la llave que guardamos en el Setting de Streamlit Cloud.
