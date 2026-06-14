@@ -16,10 +16,24 @@ question = st.text_input(
 )
 
 if question:
-    st.write(question)
-    # response = model.generate_content(
-    #  question
-    #)
-  
-  #st.write(response.text)
+      try:
+          # --- 5. CONECTANDO CON GEMINI ---
+          # Usamos gemini-1.5-flash porque es el más rápido para visión artificial.
+          #model = genai.GenerativeModel("gemini-2.5-flash")
+          
+          # Este es el 'PROMPT': la instrucción específica para la IA.
+          prompt = """
+          Dame un resumen de lo que te indico.
+          """
+          
+          # --- 6. ENVIANDO DATOS A LA API ---
+          # Enviamos una lista que contiene el texto (prompt) y la imagen.
+          response = model.generate_content(prompt)
+          
+          # --- 7. MOSTRAR EL RESULTADO ---
+          st.subheader("Resultado:")
+          st.write(response.text)
+          
+      except Exception as e:
+          st.error(f"Error: {e}")
     st.write("Hola")
