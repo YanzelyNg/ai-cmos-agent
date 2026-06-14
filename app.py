@@ -27,7 +27,7 @@ if question:
           
           # --- ENVIANDO DATOS A LA API ---
           # Enviamos una lista que contiene el texto (prompt) y la imagen.
-          response = model.generate_content(¨[prompt,question])
+          response = model.generate_content([prompt,question])
           
           # --- MOSTRAR EL RESULTADO ---
           st.subheader("Resultado:")
