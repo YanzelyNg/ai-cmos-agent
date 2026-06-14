@@ -1,5 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
+from tools import calculate
 
 # --- CONFIGURACIÓN INICIAL ---
 # st.secrets['GOOGLE_API_KEY'] busca la llave que guardamos en el Setting de Streamlit Cloud.
@@ -18,22 +19,32 @@ question = st.text_input(
     "Pregunta"
 )
 
-if question:
-      try:
-          # Este es el 'PROMPT': la instrucción específica para la IA.
-          prompt = """
-          Dame un resumen de lo que te indico.
-          """
-          
-          # --- ENVIANDO DATOS A LA API ---
-          # Enviamos una lista que contiene el texto (prompt) y la imagen.
-          response = model.generate_content([prompt,question])
-          
-          # --- MOSTRAR EL RESULTADO ---
-          st.subheader("Resultado:")
-          st.write(response.text)
-          
-      except Exception as e:
-          st.error(f"Error: {e}")
+if question.startswith("calc"):
+    expr = question.replace(
+        "calc",
+        ""
+    ).strip()
+    
+    result = calculate(expr)
+    
+    st.write(result)
+
+else:
+    try:
+      # Este es el 'PROMPT': la instrucción específica para la IA.
+      prompt = """
+      Dame un resumen de lo que te indico.
+      """
+      
+      # --- ENVIANDO DATOS A LA API ---
+      # Enviamos una lista que contiene el texto (prompt) y la imagen.
+      response = model.generate_content([prompt,question])
+      
+      # --- MOSTRAR EL RESULTADO ---
+      st.subheader("Resultado:")
+      st.write(response.text)
+      
+    except Exception as e:
+      st.error(f"Error: {e}")
 
 st.write("Hola")
