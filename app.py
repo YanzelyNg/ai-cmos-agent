@@ -1,6 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
-import tools
+import tools as t
 
 # --- CONFIGURACIÓN INICIAL ---
 # st.secrets['GOOGLE_API_KEY'] busca la llave que guardamos en el Setting de Streamlit Cloud.
@@ -26,7 +26,7 @@ if question:
         iref = float(data[1])
         ratio = float(data[2])
     
-        result = current_mirror(iref, ratio)
+        result = t.current_mirror(iref, ratio)
     
         st.write(f"Output current = {result} uA")
     
