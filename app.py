@@ -19,32 +19,41 @@ question = st.text_input(
     "Pregunta"
 )
 
-if question.startswith("calc"):
-    expr = question.replace(
-        "calc",
-        ""
-    ).strip()
+if question:
+    if question.startswith("mirror"):
+        data = question.split()
     
-    result = calculate(expr)
+        iref = float(data[1])
+        ratio = float(data[2])
     
-    st.write(result)
-
-else:
-    try:
-      # Este es el 'PROMPT': la instrucción específica para la IA.
-      prompt = """
-      Dame un resumen de lo que te indico.
-      """
-      
-      # --- ENVIANDO DATOS A LA API ---
-      # Enviamos una lista que contiene el texto (prompt) y la imagen.
-      response = model.generate_content([prompt,question])
-      
-      # --- MOSTRAR EL RESULTADO ---
-      st.subheader("Resultado:")
-      st.write(response.text)
-      
-    except Exception as e:
-      st.error(f"Error: {e}")
+        result = current_mirror(iref, ratio)
+    
+        st.write(f"Output current = {result} uA")
+    
+    else:
+        try:
+          # Este es el 'PROMPT': la instrucción específica para la IA.
+          prompt = """
+              Eres un asistente experto en:
+                - Diseño CMOS
+                - Sky130
+                - LTspice
+                - Amplificadores operacionales
+                - Current mirrors
+                - Differential pairs
+                
+                Responde de forma técnica y concisa.
+          """
+          
+          # --- ENVIANDO DATOS A LA API ---
+          # Enviamos una lista que contiene el texto (prompt) y la imagen.
+          response = model.generate_content([prompt,question])
+          
+          # --- MOSTRAR EL RESULTADO ---
+          st.subheader("Resultado:")
+          st.write(response.text)
+          
+        except Exception as e:
+          st.error(f"Error: {e}")
 
 st.write("Hola")
